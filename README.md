@@ -1,103 +1,102 @@
 # ishkarim-bench
 
-> Benchmarki CPU-first: FTS5 mikro-testy, RAPL energia, BEIR, retrieval harness.
+> **Infrastruktura benchmarkowa CPU-first — RAPL energia, FTS5 mikrotesty, BEIR evaluation**
 
-## Instalacja
+[![Tests](https://img.shields.io/badge/tests-passing-brightgreen)]()
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue)]()
+[![License](https://img.shields.io/badge/license-MIT-green)]()
+[![CPU-only](https://img.shields.io/badge/CPU-only-orange)]()
+
+## Problem, który rozwiązujemy
+
+- Pomiar zużycia energii (mJ/query) przez Intel RAPL
+- Reprodukowalne benchmarki FTS5 z seedowanymi danymi testowymi
+- Ewaluacja retrieval quality (BEIR subset) lokalnie bez płatnych API
+
+Pełna lista → [docs/PROBLEMS.md](docs/PROBLEMS.md)
+
+## Szybki start
 
 ```bash
+# Instalacja
 pip install -e projects/ishkarim-bench
+
+# Demo (10 sekund)
+python projects/ishkarim-bench/demo.py
 ```
 
-Lub lokalnie z tego repozytorium:
-
-```bash
-cd projects/ishkarim-bench
-pip install -e ".[dev]"
-```
-
-## Użycie
+## Użycie w kodzie
 
 ```python
 import ishkarim_bench as m
 
-# Lista dostępnych modułów
-print(m.MODULES)
-
-# Wczytaj indeks wiedzy
+# Wszystkie 34 katalogi wiedzy obszaru 'bench'
 docs = m.load_knowledge_index()
+print(f"{len(docs)} katalogów | obszar: {m.__area__}")
+
+# Narzędzia pomocnicze
+from ishkarim_bench.utils import read_work_md, extract_tags, extract_python_blocks
 ```
 
-## Obszar tematyczny
+## Dla kogo
 
-Ten projekt agreguje wiedzę z **34 katalogów** obszaru `bench`:
+- Wybór między modelami embeddingów przy ograniczonym budżecie CPU/energii
+- Uzasadnienie kosztu zużycia energii klientowi (SLA mJ/query)
+- Regresja testów po zmianie tokenizera lub parametrów indeksu FTS5
 
-- `Algorytmy giełdowe CPU‑friendly i OSS`
-- `Algorytmy giełdowe w trybie edukacyjnym`
-- `Analiza Strix narzędzia`
-- `Backtesting i ryzyko: algotrading na CPU`
-- `Benchmark APEX‑Agents: AI w biurze nie daje rady`
-- `Benchmarking CPU dla lokalnych modeli`
-- `Edukacyjne backtesty strategii giełdowych`
-- `Eksperyment CPU↔GPU-analiza energii (luty 2026)`
-- … i 26 więcej (pełna lista w [MODULES.md](MODULES.md))
+## Dokumentacja
 
-## Przykładowe źródła
+| Plik | Zawartość |
+|------|-----------|
+| [docs/PROBLEMS.md](docs/PROBLEMS.md) | Co rozwiązuje / czego nie / znane problemy |
+| [docs/api.md](docs/api.md) | Dokumentacja API |
+| [docs/overview.md](docs/overview.md) | Przegląd obszaru |
+| [docs/sources.md](docs/sources.md) | Źródłowe katalogi wiedzy |
+| [MODULES.md](MODULES.md) | Pełny indeks 34 katalogów |
 
-### Algorytmy giełdowe CPU‑friendly i OSS
+## Testy i benchmarki
 
-# WORK: Algorytmy giełdowe CPU‑friendly i OSS
-## 0-Metadane
-- Katalog: Algorytmy giełdowe CPU‑friendly i OSS
-- Pliki: 22 (bez placeholderów: część 1–22)
-- Tagi: backtesting, algorytmy-giełdowe, momentum, mean-reversion, pair-trading, Risk-Parity, HRP, walk-forward, event-driven, CPU-only, OSS, offline, deterministyczny, audit
+```bash
+# Testy jednostkowe
+pytest tests/test_bench.py -v
 
-### Algorytmy giełdowe w trybie edukacyjnym
+# Testy domenowe (z prawdziwymi danymi)
+pytest tests/test_bench_domain.py -v
 
-# WORK: Algorytmy giełdowe w trybie edukacyjnym
-## 0-Metadane
-- Katalog: Algorytmy giełdowe w trybie edukacyjnym
-- Pliki: 22 (bez placeholderów: część 1–23 z jednym plikiem 0-bajtowym)
-- Tagi: backtesting-edukacyjny, event-driven, look-ahead-bias, survivorship-bias, OHLCV, data-contract, strategy-API, order-management, execution-model, portfolio-accounting, risk-management, btctl-CLI, offline, deterministyczny, audit
-
-### Analiza Strix narzędzia
-
-# WORK — Analiza Strix narzędzia
-## 0-Metadane
-- **Ścieżka:** Analiza Strix narzędzia/
-- **Liczba plików:** 7/30 z treścią (Cz8–Cz30 puste — 0 bajtów)
-- **Tagi:** strix pentest ai-agent architektura c4-model dokumentacja semantic-markers analiza-kodu security idor sql-injection knowledge-system archscan
-
+# Benchmarki wydajnościowe
+python benchmarks/bench_bench.py --quick
+```
 
 ## Struktura projektu
 
 ```
 ishkarim-bench/
-├── pyproject.toml        # installable package
+├── demo.py                    ← uruchom mnie
+├── pyproject.toml
 ├── README.md
-├── MODULES.md            # pełny indeks 34 katalogów-źródeł
-├── src/
-│   └── ishkarim_bench/
-│       ├── __init__.py   # publiczne API
-│       ├── utils.py      # wspólne narzędzia
-│       └── *.py          # kod wyekstrahowany z WORK.md
+├── MODULES.md                 ← 34 katalogów-źródeł
+├── docs/
+│   ├── PROBLEMS.md            ← co rozwiązuje / czego nie
+│   ├── api.md                 ← dokumentacja API
+│   ├── overview.md
+│   └── sources.md
+├── src/ishkarim_bench/
+│   ├── __init__.py            ← MODULES list + load_knowledge_index()
+│   ├── utils.py               ← read_work_md, extract_tags, extract_python_blocks
+│   └── snippets/              ← kod z WORK.md (referencyjny)
 ├── tests/
-│   ├── __init__.py
-│   └── test_bench.py
-└── docs/
-    ├── overview.md
-    └── sources.md
+│   ├── test_bench.py         ← testy jednostkowe
+│   └── test_bench_domain.py  ← testy domenowe
+└── benchmarks/
+    └── bench_bench.py        ← benchmarki wydajnościowe
 ```
 
-## Testy
+## Ograniczenia
 
-```bash
-pytest projects/ishkarim-bench/tests/ -v
-```
-
-## Źródło danych
-
-Katalogi źródłowe znajdują się w katalogu głównym repozytorium Ishkarim.
-Każdy katalog zawiera `WORK.md` (notatki badawcze) i `TAGS.md` (metadane).
+> ⚠️ To projekt **referencyjny** — wzorce i wiedza, nie gotowa biblioteka produkcyjna.
+> Przed wdrożeniem produkcyjnym przeczytaj [docs/PROBLEMS.md](docs/PROBLEMS.md).
 
 ---
-*Wygenerowano automatycznie przez `scripts/build_projects.py`*
+
+*Część ekosystemu [Ishkarim](../../README.md) — 34 katalogów wiedzy obszaru `bench`*
+*Wygenerowano: 2026-03-11 | `scripts/build_projects.py` + `scripts/enrich_projects.py`*
