@@ -5,7 +5,7 @@
 > Łącznie unikalnych URL: **796**
 
 
-## 📄 Artykuły naukowe (33)
+## Artykuły naukowe (33)
 
 - <https://aclanthology.org/2023.eacl-main.148.pdf>  
   _źródło: `Kwantyzacja i micro-benchmarking dla CPU`_
@@ -74,7 +74,7 @@
 - <https://www.arxiv.org/abs/2602.05712>  
   _źródło: `Luty 2026: CPU↔GPU i efektywność energetyczna`_
 
-## 🐙 Repozytoria GitHub (140)
+## Repozytoria GitHub (140)
 
 - <https://github.com/powerapi-ng/pyRAPL>  
   _źródło: `Narzędzia i metody pomiaru CPU`, `New tools for local CPU energy`, `Pomiar energii CPU i TTFT w CI z pyRAPL i vLLM` +1_
@@ -237,7 +237,7 @@
 - <https://github.com/jeffhammond/STREAM>  
   _źródło: `Nowe narzędzia i benchmarki CPU`_
 
-## 🤖 ML / modele (3)
+## ML / modele (3)
 
 - <https://cdn-uploads.huggingface.co/production/uploads/65263bfb3177c2a794997821/uZ0L5uHQA_e-u1SSRifsz.png>  
   _źródło: `Luty 2026: CPU↔GPU i efektywność energetyczna`_
@@ -246,7 +246,7 @@
 - <https://huggingface.co/blog/tngtech/llm-performance-prefill-decode-concurrent-requests>  
   _źródło: `Luty 2026: CPU↔GPU i efektywność energetyczna`_
 
-## 📚 Dokumentacja (58)
+## Dokumentacja (58)
 
 - <https://sqlite.org/fts5.html>  
   _źródło: `New survey: CPU-only AGI trends`, `Nowe narzędzia i benchmarki CPU`, `Repozytoria CPU-first do pomiaru energii na token`_
@@ -365,7 +365,7 @@
 - <https://www.spec.org/cpu2017/Docs/runrules.html>  
   _źródło: `Nowe narzędzia i benchmarki CPU`_
 
-## 🔗 Inne zasoby (562)
+## Inne zasoby (562)
 
 - <https://docs.kernel.org/power/powercap/powercap.html>  
   _źródło: `Eksperyment CPU↔GPU-analiza energii (luty 2026)`, `Kalibracja energii CPU i Joule token_04`, `Kwantyzacja i micro-benchmarking dla CPU` +10_
@@ -528,7 +528,7 @@
 - <https://benchkit.local/schemas/bench-tools@1>  
   _źródło: `Nowe narzędzia i benchmarki CPU`_
 
-## 📁 Katalogi źródłowe
+## Katalogi źródłowe
 
 Obszar `bench` zawiera **34** katalogów:
 
